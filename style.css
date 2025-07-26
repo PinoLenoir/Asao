@@ -119,3 +119,8 @@ button:hover {
 .attendees li strong {
   color: #d35400;
 }
+
+/* Video section */
+#video {
+  margin-top: 40px;
+}

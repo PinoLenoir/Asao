@@ -30,6 +30,7 @@ const MIME_TYPES = {
   '.jpeg': 'image/jpeg',
   '.gif': 'image/gif',
   '.svg': 'image/svg+xml',
+  '.mp4': 'video/mp4',
 };
 
 /**
@@ -100,6 +101,12 @@ function collectRequestBody(req) {
   });
 }
 
+// Load attendees into an in‑memory cache at startup. This cache is used
+// to respond to GET requests so that attendee data is preserved in memory
+// even if persisting to disk fails (as can happen on some free hosting
+// platforms where the filesystem is read‑only).
+let attendeesCache = loadAttendees();
+
 // Create the HTTP server
 const server = http.createServer(async (req, res) => {
   const parsedUrl = url.parse(req.url, true);
@@ -107,10 +114,10 @@ const server = http.createServer(async (req, res) => {
 
   // Endpoint: GET /attendees
   if (req.method === 'GET' && pathname === '/attendees') {
-    const attendees = loadAttendees();
+    // Return the in‑memory cache rather than reading from disk each time.
     res.statusCode = 200;
     res.setHeader('Content-Type', 'application/json');
-    res.end(JSON.stringify(attendees));
+    res.end(JSON.stringify(attendeesCache));
     return;
   }
 
@@ -127,9 +134,11 @@ const server = http.createServer(async (req, res) => {
         res.end(JSON.stringify({ error: 'El nombre es obligatorio' }));
         return;
       }
-      const attendees = loadAttendees();
-      attendees.push({ name, comment, timestamp: new Date().toISOString() });
-      saveAttendees(attendees);
+      // Update the in‑memory cache
+      attendeesCache.push({ name, comment, timestamp: new Date().toISOString() });
+      // Try to persist to disk; if it fails, attendees will still be
+      // available in memory until the server restarts.
+      saveAttendees(attendeesCache);
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');
       res.end(JSON.stringify({ success: true }));
