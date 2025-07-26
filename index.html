@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Asado 9 de agosto - Registro de invitados</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header with hero image -->
+  <header>
+    <div class="overlay">
+      <h1>Asado 9 de agosto</h1>
+      <p>¡Estás cordialmente invitado(a) a compartir una gran comida!</p>
+    </div>
+  </header>
+
+  <!-- Event details section -->
+  <section id="detalles">
+    <h2>Detalles del evento</h2>
+    <ul class="details-list">
+      <li><strong>Fecha:</strong> 9 de agosto de 2025</li>
+      <li><strong>Hora:</strong> 19:00 hrs</li>
+      <li><strong>Lugar:</strong> Curiñanca 2315, Maipú (Metro Bueras)</li>
+      <li><strong>Descripción:</strong> Le lleva carnitas, tacos, karaoke, black metal y Cristián Castro.</li>
+    </ul>
+  </section>
+
+  <!-- Fee section -->
+  <section id="cuota">
+    <h2>Cuota de inscripción</h2>
+    <p>Para cubrir los costos del asado, se solicita una contribución de <strong>$15.000&nbsp;CLP</strong> por persona. Este aporte nos ayudará a comprar carne, carbón y otros insumos necesarios.</p>
+  </section>
+
+  <!-- Bank transfer details -->
+  <section id="datos-bancarios">
+    <h2>Datos para transferencia bancaria</h2>
+    <p>Si prefieres transferir tu aporte de manera anticipada, utiliza los siguientes datos. Ajusta estos campos según tu información real:</p>
+    <ul class="details-list">
+      <li><strong>Banco:</strong> Banco Chile</li>
+      <li><strong>Tipo de cuenta:</strong> Cuenta corriente</li>
+      <li><strong>Número de cuenta:</strong> 169‑13727‑09</li>
+      <li><strong>Nombre del titular:</strong> Cristián&nbsp;Pino</li>
+      <li><strong>RUT:</strong> 15.586.392‑7</li>
+      <li><strong>Correo electrónico:</strong> cristian.pino@uc.cl</li>
+      <li><strong>Asunto/Comentario:</strong> Aporte asado 9 de agosto</li>
+    </ul>
+  </section>
+
+  <!-- Registration form section -->
+  <section id="registro">
+    <h2>Confirma tu asistencia</h2>
+    <p>Por favor ingresa tu nombre y, si lo deseas, deja un mensaje para los demás. Esto nos ayudará a saber cuántas personas asistirán y a organizar mejor la comida.</p>
+    <form id="registrationForm">
+      <input type="text" id="name" name="name" placeholder="Tu nombre" required>
+      <textarea id="comment" name="comment" rows="3" placeholder="Comentario (opcional)"></textarea>
+      <button type="submit">Registrar asistencia</button>
+    </form>
+    <div class="attendees">
+      <h3>Confirmaciones:</h3>
+      <ul id="attendeesList"></ul>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
